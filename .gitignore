@@ -5,3 +5,11 @@ kgenomes_plink/
 dev.ipynb
 *.vcf.gz
 *.vcf.gz.tbi
+build
+*egg*
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
