@@ -5,6 +5,7 @@ LD patterns into data
 """
 
 import numpy as np
+import numpy.typing as npt
 
 from .population import PopulationData
 
@@ -27,6 +28,7 @@ class HaplotypeGenerator:
     tau: float
     lam: float
     window: int
+    hap_matrix: npt.NDArray[np.int8]
 
     def __init__(self, population_data: PopulationData, n_haps: int, **kwargs) -> None:
         """inits HaplotypeGenerator class and sets the initial MAF-weighted haplotypes"""
@@ -42,10 +44,10 @@ class HaplotypeGenerator:
     def init_haplotype(self) -> None:
         """pre-sets simulated haplotype matrix based on MAF alone,
         which may be refined with forward/reverse passes"""
-        hap_len = self.population_data.mafs.shape[0]
+        hap_len: int = self.population_data.mafs.shape[0]
         # initialize 2d array. This is dense, but we will store it with int8 (same size as bool)
         # for 100000 variants, that is 1kb per haplotype, which should scale okay
-        self.hap_matrix = np.zeros((self.n_haps, hap_len), dtype=np.int8)
+        self.hap_matrix: npt.NDArray[int8] = np.zeros((self.n_haps, hap_len), dtype=np.int8)
         self.hap_matrix[:] = (
             np.random.rand(self.n_haps, hap_len) < self.population_data.mafs[None, :]
         ).astype(int)
@@ -66,7 +68,7 @@ class HaplotypeGenerator:
             case "_":
                 raise ValueError(f"Unknown direction: {direction}")
 
-    def get_prob_in_window(self, a: int, context: list[int]) -> np.float32:
+    def get_prob_in_window(self, a: int, context: list[int]) -> npt.NDArray[np.float64]:
         """For a given window and a target variant, get the P(1|window)"""
         maf_a = self.population_data.mafs[a].clip(1e-9, 1 - 1e-9)
         if len(context) == 0:
@@ -97,7 +99,7 @@ class HaplotypeGenerator:
         for i in range(1, self.hap_matrix.shape[1] - 1):
             context = self._get_context(i, self.window, direction="left")
             p = self.get_prob_in_window(i, context)
-            chosen = (np.random.rand(self.n_haps) < p).astype(int)
+            chosen: npt.NDArray[np.int_] = (np.random.rand(self.n_haps) < p).astype(int)
             self.hap_matrix[:, i] = chosen
 
     def reverse_pass(self) -> None:
@@ -105,5 +107,5 @@ class HaplotypeGenerator:
         for i in reversed(range(0, self.hap_matrix.shape[1] - 1)):
             context = self._get_context(i, self.window, direction="both")
             p = self.get_prob_in_window(i, context)
-            chosen = (np.random.rand(self.n_haps) < p).astype(int)
+            chosen: npt.NDArray[np.int_] = (np.random.rand(self.n_haps) < p).astype(int)
             self.hap_matrix[:, i] = chosen

@@ -7,6 +7,7 @@ from typing import Self
 from collections import defaultdict
 
 import numpy as np
+import numpy.typing as npt
 
 from scipy.sparse import csr_matrix
 
@@ -29,8 +30,8 @@ class PopulationData:  # pylint: disable=too-few-public-methods
 
     variant_index: dict[str, int]
     variant_info: list[tuple]
-    mafs: np.array
-    positions: np.array
+    mafs: npt.NDArray[np.float64]
+    positions: npt.NDArray[np.int32]
     contigs: set[str]
     prob_matrix: csr_matrix[np.float32]
 
