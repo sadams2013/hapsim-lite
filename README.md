@@ -82,4 +82,5 @@ hapsim-lite CLI outputs directly to stdout, which should be piped through `bcfto
 # TODO
 
 - Examples and documentation for interaction with the population and simulation API
+- Allow user-specified seed for deterministic outputs
 
