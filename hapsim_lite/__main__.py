@@ -80,7 +80,7 @@ def main():
         hap.forward_pass()
         logging.info("Generating final reverse pass")
         hap.reverse_pass()
-        logging.info("Writing VCF")
+    logging.info("Writing VCF")
     call_matrix = generate_call_matrix(
         hap.hap_matrix, args.ploidy, args.num_samples, args.unphased
     )
