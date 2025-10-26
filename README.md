@@ -12,13 +12,7 @@ Its CLI outputs to VCF natively, removing complex dependencies and provides stra
 
 ## Installation
 
-Install with pip: 
-
-```bash
-pip install hapsim_lite
-```
-
-Or from source: 
+Install from source: 
 
 ```bash
 pip install https://github.com/sadams2013/hapsim-lite#egg=hapsim_lite
