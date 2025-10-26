@@ -47,7 +47,9 @@ class HaplotypeGenerator:
         hap_len: int = self.population_data.mafs.shape[0]
         # initialize 2d array. This is dense, but we will store it with int8 (same size as bool)
         # for 100000 variants, that is 1kb per haplotype, which should scale okay
-        self.hap_matrix: npt.NDArray[np.int8] = np.zeros((self.n_haps, hap_len), dtype=np.int8)
+        self.hap_matrix: npt.NDArray[np.int8] = np.zeros(
+            (self.n_haps, hap_len), dtype=np.int8
+        )
         self.hap_matrix[:] = (
             np.random.rand(self.n_haps, hap_len) < self.population_data.mafs[None, :]
         ).astype(int)
