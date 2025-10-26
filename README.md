@@ -1,6 +1,6 @@
 # HapSim-Lite
 
-Lightweight Markov-Chain N-ploidy variant simulation with preserved MAF and LD. 
+Proof-of-concept lightweight Markov-Chain N-ploidy variant simulation with preserved MAF and LD. 
 
 ## Overview
 
@@ -90,4 +90,5 @@ hapsim-lite CLI outputs directly to stdout, which should be piped through `bcfto
 - Examples and documentation for interaction with the population and simulation API
 - Allow user-specified seed for deterministic outputs
 - Parse variant info from pvar to relax the variant ID format requirement
+- Further hyperparameter tuning to improve recovery of LD signal
 
