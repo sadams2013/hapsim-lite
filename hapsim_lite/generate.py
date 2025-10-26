@@ -67,7 +67,7 @@ class HaplotypeGenerator:
                 l_base = max(0, a - window)
                 r_base = min(len(self.population_data.mafs), a + window + 1)
                 return list(range(l_base, a)) + list(range(a + 1, r_base))
-            case "_":
+            case _:
                 raise ValueError(f"Unknown direction: {direction}")
 
     def get_prob_in_window(self, a: int, context: list[int]) -> npt.NDArray[np.float64]:
