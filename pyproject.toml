@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=80", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hapsim_lite"
+version = "0.0.1"
+description = "Lightweight haplotype simulator"
+authors = [{ name = "Solomon Adams", email = "sadams2013@gmail.com" }]
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.12"
+dependencies = [
+    "numpy>2",
+    "scipy>=1.16",
+    "scikit-learn>=1.7"
+]
+
+[project.scripts]
+hapsim-lite = "hapsim_lite.__main__:main"
+
+[tool.setuptools]
+package-dir = {"" = "."}
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["hapsim_lite*"]
+exclude = ["tests*", "dev*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[dependency-groups]
+dev = [
+    "black",
+    "pylint",
+    "pytest"
+]
