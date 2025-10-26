@@ -43,10 +43,10 @@ def main():
     )
     # hyperparameters
     parser.add_argument(
-        "-w", "--ld-window", type=int, help="LD window in adjacent variants", default=2
+        "-w", "--ld-window", type=int, help="LD window in adjacent variants", default=5
     )
     parser.add_argument(
-        "-t", type=float, help="LD smoothing hyperparameter", default=0.3
+        "-t", type=float, help="LD smoothing hyperparameter", default=0.5
     )
     parser.add_argument(
         "-d",
