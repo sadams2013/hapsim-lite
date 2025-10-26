@@ -95,4 +95,5 @@ hapsim-lite CLI outputs directly to stdout, which should be piped through `bcfto
 
 - Examples and documentation for interaction with the population and simulation API
 - Allow user-specified seed for deterministic outputs
+- Parse variant info from pvar to relax the variant ID format requirement
 
