@@ -11,7 +11,8 @@ from .generate import HaplotypeGenerator
 from .vcf import write_vcf, generate_sample_ids, generate_call_matrix
 
 
-if __name__ == "__main__":
+def main():
+    """CLI Entrypoint"""
     parser = argparse.ArgumentParser(
         prog="HapSim Lite",
         description="Simulate phased variant calls from pre-calculated frequencies and LD",
