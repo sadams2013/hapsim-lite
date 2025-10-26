@@ -1,0 +1,7 @@
+__pycache__/
+plink/
+plink_out/
+kgenomes_plink/
+dev.ipynb
+*.vcf.gz
+*.vcf.gz.tbi
