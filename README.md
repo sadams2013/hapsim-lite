@@ -1,6 +1,6 @@
 # HapSim-Lite
 
-Lightweight Markov-Chain Nploidy variant simulation with preserved MAF and LD. 
+Lightweight Markov-Chain N-ploidy variant simulation with preserved MAF and LD. 
 
 ## Overview
 
