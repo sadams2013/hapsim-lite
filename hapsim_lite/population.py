@@ -118,6 +118,9 @@ class PopulationData:  # pylint: disable=too-few-public-methods
                 ld_data += [pa_b, pa_b]
                 ld_rows += [var_id_a_address, var_id_b_address]
                 ld_columns += [var_id_b_address, var_id_a_address]
+        num_vars = len(self.mafs)
         self.prob_matrix = csr_matrix(
-            (ld_data, (ld_rows, ld_columns)), dtype=np.float32
+            (ld_data, (ld_rows, ld_columns)),
+            shape=(num_vars, num_vars),
+            dtype=np.float32,
         )
