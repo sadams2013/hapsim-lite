@@ -32,6 +32,11 @@ def main():
     parser.add_argument(
         "-p", "--ploidy", type=int, help="Ploidy in output VCF", default=2
     )
+    parser.add_argument(
+        "--maf-only",
+        action="store_true",
+        help="Skip Markov-Chain and just simulate based on allele frequencies",
+    )
     # output options
     parser.add_argument(
         "--unphased", action="store_true", help="output unphased results"
@@ -66,13 +71,16 @@ def main():
         tau=args.t,
         lam=args.d,
     )
-    logging.info("Generating initial forward pass")
-    hap.forward_pass()
-    logging.info("Generating final reverse pass")
-    hap.reverse_pass()
-    hap.forward_pass()
-    hap.reverse_pass()
-    logging.info("Writing VCF")
+    if args.maf_only:
+        logging.info(
+            "Skipping Markov-Chain walk, simulation will not have realistic LD patterns"
+        )
+    else:
+        logging.info("Generating initial forward pass")
+        hap.forward_pass()
+        logging.info("Generating final reverse pass")
+        hap.reverse_pass()
+        logging.info("Writing VCF")
     call_matrix = generate_call_matrix(
         hap.hap_matrix, args.ploidy, args.num_samples, args.unphased
     )
