@@ -34,6 +34,18 @@ HapSim-Lite has a CLI (`hapsim-lite`) that is intended to work with frequency an
 
 Chromosome and whole-genome pvar/psam/pgen files can be obtained here: https://www.cog-genomics.org/plink/2.0/resources#phase3_1kg or generated from your own VCF files. Note that you should split multiallelic markers before generating. 
 
+**Plink input files MUST use variant IDs formatted as chr_pos_ref_alt.** This can be set with (or adapted for whatever the input is (e.g. VCF))
+
+```bash
+
+plink/plink2 \
+    --pfile base/plink/prefix \
+    --set-all-var-ids @_#_\$r_\$a \
+    --new-id-max-allele-len 1000 \
+    --out preprocessed \
+    --make-pgen
+```
+
 The following plink commands will generate required input files for hapsim-lite. The maf and hwe filters are optional, but will help with runtime by removing rare and/or low-quality variants that are less likely to perform well in the simulated output. They may be adjusted or omitted depending on your objective.
 
 ```bash
@@ -41,7 +53,7 @@ The following plink commands will generate required input files for hapsim-lite.
 # minor allele frequencies
 
 plink2 \
-    --pfile path/to/plink/prefix \
+    --pfile preprocessed \
     --freq \
     --maf 0.05 \
     --hwe 1e-6 0.001 \
@@ -52,7 +64,7 @@ plink2 \
 # linkage disequilibrium
 
 plink2 \
-    --pfile path/to/plink/prefix \
+    --pfile preprocessed \
     --maf 0.05 \
     --hwe 1e-6 0.001 \
     --r-unphased \
